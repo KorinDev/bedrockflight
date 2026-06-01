@@ -29,10 +29,10 @@ public abstract class CreativeFlightMixin {
     private void bedrockCreativeFlight(Vec3 input, CallbackInfo ci) {
         Player player = (Player)(Object)this;
 
-        if (player.getAbilities().flying && player.isCreative()) {
+        if (player.getAbilities().flying && player.isCreative() && !player.isInWater()) {
             originalY = player.getDeltaMovement().y;
 
-            player.getAbilities().setFlyingSpeed(0.08f);
+            player.getAbilities().setFlyingSpeed(0.06f);
 
             if (input.x == 0 && input.z == 0) {
                 player.setDeltaMovement(0, player.getDeltaMovement().y, 0);
@@ -40,7 +40,7 @@ public abstract class CreativeFlightMixin {
         }
     }
 
-    @Inject(method = "travel", at = @At("RETURN"))
+    /*@Inject(method = "travel", at = @At("RETURN"))
     private void onTravelEnd(Vec3 input, CallbackInfo ci) {
         Player player = (Player)(Object)this;
 
@@ -48,5 +48,5 @@ public abstract class CreativeFlightMixin {
             Vec3 currentMotion = player.getDeltaMovement();
             player.setDeltaMovement(currentMotion.x, originalY * 0.6, currentMotion.z);
         }
-    }
+    }*/
 }
