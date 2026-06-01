@@ -11,7 +11,7 @@
 		"homepage": "",
 		"sources": "https://github.com/KorinDev/bedrockflight"
 	},
-	"license": "ARR",
+	"license": "MIT",
 	"icon": "assets/bedrockflight/icon.png",
 	"environment": "*",
 	"entrypoints": {
