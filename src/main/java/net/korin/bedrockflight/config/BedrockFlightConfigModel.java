@@ -9,6 +9,8 @@ import io.wispforest.owo.config.annotation.SectionHeader;
 @Config(name = "bedrockflight", wrapperName = "BedrockFlightConfig")
 public class BedrockFlightConfigModel {
 
+    public boolean enabled = true;
+
     @RangeConstraint(min = 0.01, max = 0.1)
     public float flyingSpeed = 0.06f;
 

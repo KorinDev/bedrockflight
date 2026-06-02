@@ -23,6 +23,10 @@ public abstract class CreativeFlightMixin {
 
     @Inject(method = "travel", at = @At("TAIL"))
     private void bedrockCreativeFlight(Vec3 input, CallbackInfo ci) {
+        if (!BedrockFlight.CONFIG.enabled()) {
+            return;
+        }
+
         Player player = (Player)(Object)this;
 
         if (player.getAbilities().flying && player.isCreative() && player.isLocalPlayer()) {

@@ -3,6 +3,8 @@
 
   "text.config.bedrockflight.section.flight": "Flight",
 
+  "text.config.bedrockflight.option.enabled": "Enabled",
+
   "text.config.bedrockflight.option.flyingSpeed": "Flying Speed",
   "text.config.bedrockflight.option.flyingSpeed.tooltip": "Horizontal movement speed while flying.\nDefault: 0.06",
 
