@@ -12,3 +12,9 @@ Pretty self explainatory in my opinion.
 
 ## License:
 This project is under the MIT license.
+
+## Mirrors
+
+[GitHub](https://github.com/KorinDev/bedrockflight/)
+[Codeberg](https://codeberg.org/korin/bedrockflight)
+[GitLab](https://gitlab.com/korin.dev/bedrockflight)
