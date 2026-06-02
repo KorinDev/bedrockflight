@@ -23,7 +23,6 @@ public abstract class CreativeFlightMixin {
             player.getAbilities().setFlyingSpeed(0.06f);
 
             if (input.x == 0 && input.z == 0) {
-                //player.setDeltaMovement(0, player.getDeltaMovement().y, 0);
                 Vec3 current = player.getDeltaMovement();
 
                 double newX = current.x * DECELERATION_FACTOR;
