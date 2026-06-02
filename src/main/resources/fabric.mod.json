@@ -8,8 +8,9 @@
 		"Korin"
 	],
 	"contact": {
-		"homepage": "",
-		"sources": "https://github.com/KorinDev/bedrockflight"
+		"homepage": "https://discord.com/invite/b59Gjxxzqf",
+		"sources": "https://github.com/KorinDev/bedrockflight",
+        "issues": "https://github.com/KorinDev/bedrockflight/issues"
 	},
 	"license": "MIT",
 	"icon": "assets/bedrockflight/icon.png",

@@ -1,0 +1,14 @@
+{
+  "text.config.bedrockflight.title": "Bedrock Flight",
+
+  "text.config.bedrockflight.section.flight": "Flight",
+
+  "text.config.bedrockflight.option.flyingSpeed": "Flying Speed",
+  "text.config.bedrockflight.option.flyingSpeed.tooltip": "Horizontal movement speed while flying.\nDefault: 0.06",
+
+  "text.config.bedrockflight.option.decelerationFactor": "Deceleration Factor",
+  "text.config.bedrockflight.option.decelerationFactor.tooltip": "How quickly you stop when releasing movement keys.\nLower = faster stop, Higher = longer glide.\nDefault: 0.65",
+
+  "text.config.bedrockflight.option.stopThreshold": "Stop Threshold",
+  "text.config.bedrockflight.option.stopThreshold.tooltip": "Velocity below this value is rounded to zero.\nDefault: 0.001"
+}
