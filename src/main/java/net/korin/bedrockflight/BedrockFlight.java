@@ -15,6 +15,8 @@ public class BedrockFlight implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Initialized");
+
+        LOGGER.info("Initialized");
+
 	}
 }

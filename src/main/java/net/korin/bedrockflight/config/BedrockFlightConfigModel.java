@@ -3,7 +3,6 @@ package net.korin.bedrockflight.config;
 import io.wispforest.owo.config.annotation.Config;
 import io.wispforest.owo.config.annotation.Modmenu;
 import io.wispforest.owo.config.annotation.RangeConstraint;
-import io.wispforest.owo.config.annotation.SectionHeader;
 
 @Modmenu(modId = "bedrockflight")
 @Config(name = "bedrockflight", wrapperName = "BedrockFlightConfig")
