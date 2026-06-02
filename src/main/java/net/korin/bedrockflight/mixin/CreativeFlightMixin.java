@@ -2,34 +2,35 @@ package net.korin.bedrockflight.mixin;
 
 import net.korin.bedrockflight.BedrockFlight;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import javax.swing.*;
 
 @Mixin(Player.class)
 public abstract class CreativeFlightMixin {
 
 
-    @Shadow
-    public abstract void travel(Vec3 input);
-
-    @Shadow
-    public abstract float getAttackStrengthScale(float a);
 
     @Inject(method = "travel", at = @At("TAIL"))
     private void bedrockCreativeFlight(Vec3 input, CallbackInfo ci) {
         if (!BedrockFlight.CONFIG.enabled()) {
-            return;
+            return; // Cancel if mod is disabled.
         }
 
         Player player = (Player)(Object)this;
 
-        if (player.getAbilities().flying && player.isCreative() && player.isLocalPlayer()) {
+        if (player.gameMode() == GameType.SURVIVAL || player.gameMode() == GameType.ADVENTURE) {
+            return; // Cancel if in survival / adventure mode.
+        }
+
+        if (player.gameMode() == GameType.SPECTATOR && !BedrockFlight.CONFIG.enabledSpectator()) {
+            return; // Cancel if in spectator mode, unless "enabledSpectator" is set to true. false by default.
+        }
+
+        if (player.getAbilities().flying && player.isLocalPlayer()) { // Confirm if is "this" player and if can fly.
 
             float speed = BedrockFlight.CONFIG.flyingSpeed();
             float decel = BedrockFlight.CONFIG.decelerationFactor();
@@ -48,6 +49,8 @@ public abstract class CreativeFlightMixin {
 
                 player.setDeltaMovement(newX, current.y, newZ);
             }
+        } else {
+            player.getAbilities().setFlyingSpeed(0.05F); // Reset flight speed back to vanilla 0.05F
         }
     }
 }

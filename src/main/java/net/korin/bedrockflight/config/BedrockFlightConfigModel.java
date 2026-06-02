@@ -11,6 +11,8 @@ public class BedrockFlightConfigModel {
 
     public boolean enabled = true;
 
+    public boolean enabledSpectator = false;
+
     @RangeConstraint(min = 0.01, max = 0.1)
     public float flyingSpeed = 0.06f;
 
