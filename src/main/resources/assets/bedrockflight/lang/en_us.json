@@ -4,7 +4,12 @@
   "text.config.bedrockflight.section.flight": "Flight",
 
   "text.config.bedrockflight.option.enabled": "Enabled",
-  "text.config.bedrockflight.option.enabledSpectator": "Enable in Spectator Mode",
+
+  "text.config.bedrockflight.category.spectatorSettings": "Spectator Mode",
+
+  "text.config.bedrockflight.option.spectatorSettings.enabledSpectator": "Enable in Spectator Mode",
+  "text.config.bedrockflight.option.spectatorSettings.spectatorAdjustSpeedViaScroll": "Use Scroll to Adjust Speed",
+  "text.config.bedrockflight.option.spectatorSettings.spectatorScrollSensitivity": "Scroll Sensitivity",
 
   "text.config.bedrockflight.option.flyingSpeed": "Flying Speed",
   "text.config.bedrockflight.option.flyingSpeed.tooltip": "Horizontal movement speed while flying.\nDefault: 0.06",

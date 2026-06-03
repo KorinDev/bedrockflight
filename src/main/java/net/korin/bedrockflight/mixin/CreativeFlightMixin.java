@@ -1,6 +1,10 @@
 package net.korin.bedrockflight.mixin;
 
+import com.mojang.authlib.minecraft.client.MinecraftClient;
 import net.korin.bedrockflight.BedrockFlight;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.ScrollWheelHandler;
+import net.minecraft.world.entity.player.Input;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
@@ -11,6 +15,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Player.class)
 public abstract class CreativeFlightMixin {
+
+    private float spectatorAddSpeed = 0.0f;
+
+    private boolean wasSpectatorLastTick = false;
 
 
 
@@ -26,7 +34,7 @@ public abstract class CreativeFlightMixin {
             return; // Cancel if in survival / adventure mode.
         }
 
-        if (player.gameMode() == GameType.SPECTATOR && !BedrockFlight.CONFIG.enabledSpectator()) {
+        if (player.gameMode() == GameType.SPECTATOR && !BedrockFlight.CONFIG.spectatorSettings.enabledSpectator()) {
             return; // Cancel if in spectator mode, unless "enabledSpectator" is set to true. false by default.
         }
 
@@ -36,7 +44,25 @@ public abstract class CreativeFlightMixin {
             float decel = BedrockFlight.CONFIG.decelerationFactor();
             float threshold = BedrockFlight.CONFIG.stopThreshold();
 
-            player.getAbilities().setFlyingSpeed(speed);
+
+
+            if (player.gameMode() == GameType.SPECTATOR && BedrockFlight.CONFIG.spectatorSettings.enabledSpectator() && BedrockFlight.CONFIG.spectatorSettings.spectatorAdjustSpeedViaScroll()){
+                if (BedrockFlight.hasScroll()) {
+                    if (spectatorAddSpeed >= 4.0f){
+                        spectatorAddSpeed = 4.0f;
+                    }
+                    if (spectatorAddSpeed < 0.0f) {
+                        spectatorAddSpeed = 0.0f;
+                    }
+                    spectatorAddSpeed += (float) BedrockFlight.getLastScrollY() * BedrockFlight.CONFIG.spectatorSettings.spectatorScrollSensitivity();
+
+                }
+                player.getAbilities().setFlyingSpeed(speed + spectatorAddSpeed);
+                BedrockFlight.consumeScroll();
+            } else {
+                spectatorAddSpeed = 0.0f;
+                player.getAbilities().setFlyingSpeed(speed);
+            }
 
             if (input.x == 0 && input.z == 0) {
                 Vec3 current = player.getDeltaMovement();
