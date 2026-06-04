@@ -1,14 +1,11 @@
 package net.korin.bedrockflight.mixin;
 
-import com.mojang.authlib.minecraft.client.MinecraftClient;
 import net.korin.bedrockflight.BedrockFlight;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.ScrollWheelHandler;
-import net.minecraft.world.entity.player.Input;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -16,9 +13,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Player.class)
 public abstract class CreativeFlightMixin {
 
+    @Unique
     private float spectatorAddSpeed = 0.0f;
 
-    private boolean wasSpectatorLastTick = false;
 
 
 
@@ -38,7 +35,7 @@ public abstract class CreativeFlightMixin {
             return; // Cancel if in spectator mode, unless "enabledSpectator" is set to true. false by default.
         }
 
-        if (player.getAbilities().flying && player.isLocalPlayer()) { // Confirm if is "this" player and if can fly.
+        if (player.getAbilities().flying && player.isLocalPlayer()) { // Confirm if is "this" player and if they can fly.
 
             float speed = BedrockFlight.CONFIG.flyingSpeed();
             float decel = BedrockFlight.CONFIG.decelerationFactor();
@@ -57,11 +54,11 @@ public abstract class CreativeFlightMixin {
                     spectatorAddSpeed += (float) BedrockFlight.getLastScrollY() * BedrockFlight.CONFIG.spectatorSettings.spectatorScrollSensitivity();
 
                 }
-                player.getAbilities().setFlyingSpeed(speed + spectatorAddSpeed);
+                player.getAbilities().setFlyingSpeed((speed + spectatorAddSpeed) * BedrockFlight.getCustomFlightSpeedMult());
                 BedrockFlight.consumeScroll();
             } else {
                 spectatorAddSpeed = 0.0f;
-                player.getAbilities().setFlyingSpeed(speed);
+                player.getAbilities().setFlyingSpeed(speed * BedrockFlight.getCustomFlightSpeedMult());
             }
 
             if (input.x == 0 && input.z == 0) {

@@ -3,7 +3,7 @@
 	"id": "bedrockflight",
 	"version": "${version}",
 	"name": "Bedrock Flight",
-	"description": "",
+	"description": "Enhanced creative flight with adjustable settings. Initially inspired by Bedrock Edition Creative Flying mechanics, but improved.",
 	"authors": [
 		"Korin"
 	],

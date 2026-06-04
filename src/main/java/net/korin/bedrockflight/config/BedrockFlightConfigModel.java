@@ -4,6 +4,7 @@ import io.wispforest.owo.config.annotation.Config;
 import io.wispforest.owo.config.annotation.Modmenu;
 import io.wispforest.owo.config.annotation.RangeConstraint;
 import io.wispforest.owo.config.annotation.Nest;
+import io.wispforest.owo.config.annotation.ExcludeFromScreen;
 
 @Modmenu(modId = "bedrockflight")
 @Config(name = "bedrockflight", wrapperName = "BedrockFlightConfig")
@@ -21,6 +22,7 @@ public class BedrockFlightConfigModel {
         @RangeConstraint(min=0.005f, max = 0.200f)
         public float spectatorScrollSensitivity = 0.01f;
     }
+
 
 
 

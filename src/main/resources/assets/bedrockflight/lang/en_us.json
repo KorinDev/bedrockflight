@@ -18,5 +18,9 @@
   "text.config.bedrockflight.option.decelerationFactor.tooltip": "How quickly you stop when releasing movement keys.\nLower = faster stop, Higher = longer glide.\nDefault: 0.65",
 
   "text.config.bedrockflight.option.stopThreshold": "Stop Threshold",
-  "text.config.bedrockflight.option.stopThreshold.tooltip": "Velocity below this value is rounded to zero.\nDefault: 0.001"
+  "text.config.bedrockflight.option.stopThreshold.tooltip": "Velocity below this value is rounded to zero.\nDefault: 0.001",
+
+  "key.category.bedrockflight.keybinds": "Bedrock Flight",
+  "key.bedrockflight.increase": "Increase Speed",
+  "key.bedrockflight.decrease": "Decrease Speed"
 }
