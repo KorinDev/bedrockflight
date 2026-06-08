@@ -1,6 +1,8 @@
 package net.korin.bedrockflight.mixin;
 
 import net.korin.bedrockflight.BedrockFlight;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
@@ -16,6 +18,44 @@ public abstract class CreativeFlightMixin {
     @Unique
     private float spectatorAddSpeed = 0.0f;
 
+
+
+    @Inject(method = "travel", at = @At("HEAD"), cancellable = true)
+    private void travelHEAD(Vec3 input, CallbackInfo ci) {
+        if (!BedrockFlight.CONFIG.enabled()) {
+            return; // Cancel if mod is disabled.
+        }
+        Player player = (Player)(Object)this;
+
+
+        if (!BedrockFlight.CONFIG.legacySprintFlight.enabled()) return;
+
+
+
+
+        if (!player.getAbilities().flying || !Minecraft.getInstance().options.keySprint.isDown()) return;
+
+        Vec3 lookVec = player.getLookAngle();
+        Vec3 rightVec = lookVec.cross(new Vec3(0, 1, 0)).normalize();
+        float speed = BedrockFlight.CONFIG.flyingSpeed() * 8;
+
+        Vec3 movement = new Vec3(0, 0, 0);
+
+        if (input.z > 0) movement = movement.add(lookVec.scale(input.z));
+        if (input.z < 0) movement = movement.subtract(lookVec.scale(-input.z));
+
+        if (input.x > 0) movement = movement.add(rightVec.scale(-input.x));
+        if (input.x < 0) movement = movement.subtract(rightVec.scale(input.x));
+
+        if (input.y > 0) movement = movement.add(0, speed, 0);
+        if (input.y < 0) movement = movement.add(0, -speed, 0);
+
+        movement = movement.normalize().scale(speed);
+
+        player.setDeltaMovement(movement);
+        player.move(MoverType.SELF, player.getDeltaMovement());
+        return;
+    }
 
 
 
@@ -61,6 +101,8 @@ public abstract class CreativeFlightMixin {
                 player.getAbilities().setFlyingSpeed(speed * BedrockFlight.getCustomFlightSpeedMult());
             }
 
+
+
             if (input.x == 0 && input.z == 0) {
                 Vec3 current = player.getDeltaMovement();
 
@@ -72,6 +114,17 @@ public abstract class CreativeFlightMixin {
 
                 player.setDeltaMovement(newX, current.y, newZ);
             }
+
+            if (input.y == 0) {
+                Vec3 current = player.getDeltaMovement();
+
+                double newY = current.y * decel;
+
+                if (Math.abs(newY) < threshold) newY = 0;
+
+                player.setDeltaMovement(current.x, newY * BedrockFlight.CONFIG.verticalSpeedBoost(), current.z);
+            }
+
         } else {
             player.getAbilities().setFlyingSpeed(0.05F); // Reset flight speed back to vanilla 0.05F
         }

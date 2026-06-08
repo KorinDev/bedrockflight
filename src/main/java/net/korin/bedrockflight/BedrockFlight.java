@@ -5,6 +5,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+import net.fabricmc.fabric.mixin.client.keymapping.KeyMappingAccessor;
 import net.korin.bedrockflight.config.BedrockFlightConfig;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.components.toasts.SystemToast;
@@ -79,6 +80,8 @@ public class BedrockFlight implements ModInitializer {
                 }
             }
         });
+
+
 
 	}
 

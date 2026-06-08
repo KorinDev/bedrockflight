@@ -24,14 +24,21 @@ public class BedrockFlightConfigModel {
     }
 
 
-
-
     @RangeConstraint(min = 0.01, max = 0.1)
     public float flyingSpeed = 0.06f;
+
+    @RangeConstraint(min = 1.0, max = 2.0)
+    public float verticalSpeedBoost = 2.0f;
 
     @RangeConstraint(min = 0.1, max = 1.0)
     public float decelerationFactor = 0.65f;
 
     @RangeConstraint(min = 0.0, max = 0.002)
     public float stopThreshold = 0.001f;
+
+    @Nest public LegacySprintFlight legacySprintFlight = new LegacySprintFlight();
+
+    public static class LegacySprintFlight {
+        public boolean enabled = false;
+    }
 }
