@@ -1,3 +1,6 @@
+[CurseForge](https://www.curseforge.com/minecraft/mc-mods/bedrock-flight)
+[Modrinth](https://modrinth.com/mod/bedrock-flight)
+
 # Bedrock Flight
 
 **#MadeWithOWOLIB**
